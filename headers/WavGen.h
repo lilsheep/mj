@@ -11,8 +11,6 @@ private:
     short frameSize = (short)(16/8);
 public:
 void SaveWav (double data[], int dataLength, int rate);
-
-
 };
 
 

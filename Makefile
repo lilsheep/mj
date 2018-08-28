@@ -1,13 +1,9 @@
-TARGET    := $(patsubst %-gcc,%,$(GCCEXE))
-CC         = $(TARGET)-gcc
-GCC        = $(TARGET)-g++
+CC         = -gcc
+GCC        = -g++
 
 TOP = $(shell pwd)
 SRCDIR = $(TOP)/src
 INCDIR = $(TOP)/headers
-
-MAIN = \
-	$(TOP)/main.cpp
 
 SOURCES = \
 	$(wildcard $(SRCDIR)/*.cpp )
@@ -17,9 +13,8 @@ INCLUDES = \
 
 CFLAGS = \
 	-std=c++17 \
-	-lm \
-	-fpermissive
+	-lm 
 
 mj: $(SOURCES)
-	$(GCC) -o $@ $^ $(MAIN) $(INCLUDES) $(CFLAGS)
+	$(GCC) -o $@ $^ $(INCLUDES) $(CFLAGS)
  
