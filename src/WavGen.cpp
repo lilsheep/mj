@@ -21,8 +21,8 @@ void WavGenerator::SaveWav(double data[], int dataLength, int rate) {
   write_word(output,     16, 4);  // no extension data
   write_word(output,      1, 2);  // PCM - integer samples
   write_word(output,      2, 2);  // two channels (stereo file)
-  write_word(output,   8000, 4);  // samples per second (Hz)
-  write_word(output, 180224, 4);  // (Sample Rate * BitsPerSample * Channels) / 8
+  write_word(output,   rate, 4);  // samples per second (Hz)
+  write_word(output, 256000, 4);  // (Sample Rate * BitsPerSample * Channels) / 8
   write_word(output,      4, 2);  // data block size (size of two integer samples, one for each channel, in bytes)
   write_word(output,     16, 2);  // number of bits per sample (use a multiple of 8)
 

@@ -4,20 +4,19 @@
 #include <cmath>
 #include <array>
 
-#define RATE 8000
-#define SEC 5
-#define VOL 320000
+#define RATE 8000 //Sample Rate
+#define SEC 5 //Sample Length
+#define AMP 75 //Amplitude = Volume of Sample
 
 int main () {
-    float freq = M_PI * 2 * 2.0 / RATE;
-    std::cout << freq << std::endl;
+    //float freq = 2 * M_PI * SEC / RATE;
+    float freq = 261.626; //middle C
     int bufferSize = SEC * RATE;
-    std::cout << bufferSize << std::endl; 
     double buf[bufferSize];
     Waver osc;
     WavGenerator gen;
     for (int i = 0; i < bufferSize; i++) {
-        buf[i] = VOL * osc.Sine(i, freq);
+        buf[i] = AMP * osc.Sine(i, freq);
     };
     gen.SaveWav(buf, bufferSize, RATE);
     return 0;
