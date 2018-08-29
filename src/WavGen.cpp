@@ -13,23 +13,34 @@ namespace little_endian_io
 
 using namespace little_endian_io;
 
-void WavGenerator::SaveWav(double data[], int dataLength, int rate) {
+WavGenerator::WavGenerator(int channels, int BitsPerSample ) {
+  channelNum = channels; 
+  bps = BitsPerSample;
+}
 
+
+void WavGenerator::SaveWav(double data[], int dataLength, int rate) {
+  int byteRate = (rate * channelNum * bps) / 8;
   std::ofstream output("res.wav", std::ios::out | std::ios::binary);
-  // Write the file headers
-  output << "RIFF----WAVEfmt ";     // (chunk size to be filled in later)
-  write_word(output,     16, 4);  // no extension data
-  write_word(output,      1, 2);  // PCM - integer samples
-  write_word(output,      2, 2);  // two channels (stereo file)
-  write_word(output,   rate, 4);  // samples per second (Hz)
-  write_word(output, 256000, 4);  // (Sample Rate * BitsPerSample * Channels) / 8
-  write_word(output,      4, 2);  // data block size (size of two integer samples, one for each channel, in bytes)
-  write_word(output,     16, 2);  // number of bits per sample (use a multiple of 8)
+  // WAVE FILE HEADER
+
+  /* R I F F |(s i z e)| f m t _ 
+   * _ _ _ _ | _ _ _ _ | _ _ _ _ (bytes)
+   ************************************/
+  output << "RIFF----WAVEfmt ";  // chunk size left to be determined
+  write_word(output,       16, 4);  // no extension data
+  write_word(output,        1, 2);  // PCM - integer samples
+  write_word(output,        2, 2);  // two channels (stereo file)
+  write_word(output,     rate, 4);  // samples per second (Hz)
+  write_word(output, byteRate, 4);  // (Sample Rate * BitsPerSample * Channels) / 8
+  write_word(output,        4, 2);  // data block size (size of two integer samples, one for each channel, in bytes)
+  write_word(output,      bps, 2);  // number of bits per sample (use a multiple of 8)
 
   // Write the data chunk header
   size_t data_chunk_pos = output.tellp();
-  output << "data----";  // (chunk size to be filled in later)
+  output << "data----";  // chunk size left to be determined
 
+  //filling data
   for (int i = 0; i < dataLength; i++) {  
       write_word(output, (int)data[i], 2); 
   };

@@ -8,8 +8,11 @@
 
 class WavGenerator {
 private:
-    short frameSize = (short)(16/8);
+    int channelNum = 2;
+    int bps = 32;
+
 public:
+WavGenerator(int channels, int bitsPerSample );
 void SaveWav (double data[], int dataLength, int rate);
 };
 
