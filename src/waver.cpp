@@ -7,7 +7,7 @@
  **                     *  *  *                     *
  */
 double Waver::Sine (int index, double freq){
-    return sin(freq * index);
+    return sin(2 * M_PI * freq * index);
 };
 /*           *          *          *          *
  *         * *        * *        * *        * *

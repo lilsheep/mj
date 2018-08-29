@@ -3,25 +3,29 @@
 #include "WavGen.h"
 #include <cmath>
 #include <array>
+#include <fstream>
 
-#define RATE 8000  //Sample Rate
-#define SEC  10    //Sample Length
-#define AMP  32767 //Amplitude = Volume of Sample
+#define RATE     8000   //Sample Rate
+#define SEC      *2     //TODO: insert formula (dep. on bps & rate)
+#define LENGTH   10 SEC //Sample Length
+#define AMP_MAX  32767  
+#define AMP      15000  //Amplitude = Volume of Sample
 #define CHANNELS 2
-#define BPS 32
+#define BPS      16
 
 int main () {
-    float freq = 1.0;
-    float approxFreq = 2 * M_PI * freq / RATE; //makes our frequency compatible
-                                               //better move this to waver
-    int bufferSize = SEC * RATE; 
+    std::fstream logFile("log.txt", std::ios::out);
+    logFile.flush();
+    float freq = 262.0;
+    float digitalFreq = freq / RATE; //makes analogue freq digital
+    int bufferSize = LENGTH * RATE; 
     double buf[bufferSize];
     Waver osc;
     WavGenerator gen(CHANNELS, BPS); 
     for (int i = 0; i < bufferSize; i++) {
-        buf[i] = AMP * osc.Sine(i, approxFreq);
+        buf[i] = AMP * osc.Saw(i, digitalFreq);
+        logFile << buf[i] << std::endl;
     };
-
     gen.SaveWav(buf, bufferSize, RATE);
     return 0;
 }  

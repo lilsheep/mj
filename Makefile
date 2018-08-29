@@ -3,7 +3,7 @@ GCC        = -g++
 
 TOP = $(shell pwd)
 SRCDIR = $(TOP)/src
-INCDIR = $(TOP)/headers
+INCDIR = $(TOP)/include
 
 SOURCES = \
 	$(wildcard $(SRCDIR)/*.cpp )
