@@ -1,5 +1,6 @@
 #include "WavGen.h"
 
+//convert input into little endian format
 namespace little_endian_io
 {
   template <typename Word>

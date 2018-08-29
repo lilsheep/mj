@@ -2,7 +2,7 @@
 #define _WAVER_H_
 
 #include <cmath>
-
+//Basic interface for oscillation 
 class Waver {
 private:
 

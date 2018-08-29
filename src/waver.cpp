@@ -1,8 +1,21 @@
 #include "waver.h"
-
+/*        
+ *       *  *  *                      *  *  * 
+ *    *           *                *           *  
+ *  *               *            *               *
+ * *                  *         *                 *
+ **                     *  *  *                     *
+ */
 double Waver::Sine (int index, double freq){
     return sin(freq * index);
 };
+/*           *          *          *          *
+ *         * *        * *        * *        * *
+ *       *   *      *   *      *   *      *   *
+ *     *     *    *     *    *     *    *     *
+ *   *       *  *       *  *       *  *       *      
+ * *         *          *          *          *
+ */
 double Waver::Saw (int index, double freq) {
     return 2.0 * (index * freq - floor(index * freq)) -1.0;
 };

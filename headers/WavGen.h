@@ -8,8 +8,8 @@
 
 class WavGenerator {
 private:
-    int channelNum = 2;
-    int bps = 32;
+    int channelNum = 2; 
+    int bps        = 32;//bits per sample 
 
 public:
 WavGenerator(int channels, int bitsPerSample );
