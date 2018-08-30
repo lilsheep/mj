@@ -1,0 +1,4 @@
+make oscillation class; it will be using waver like interface and provide many functions to mix waves 
+
+move defines at least in separate header, better in another big class with all the program logic;
+
